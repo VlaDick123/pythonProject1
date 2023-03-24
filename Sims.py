@@ -10,6 +10,17 @@ class Human:
         self.job = job
         self.car = car
         self.home = home
+        self.walk = 50
+
+    def get_walk(self):
+        if self.home.food <=0:
+            self.go("walk")
+        else:
+            if self.satiety >= 100:
+                self.satiety = 50
+                return
+            self.satiety -= 5
+            self.home.food += 5
 
     def get_home(self):
         self.home = House()
@@ -25,6 +36,7 @@ class Human:
             self.to_repair()
             return
         self.job = Job(job_list)
+        self.walk -= 5
 
     def eat(self):
         if self.home.food <=0:
@@ -35,6 +47,7 @@ class Human:
                 return
             self.satiety += 5
             self.home.food -= 5
+            self.walk -= 5
 
     def work(self):
         if self.car.drive():
@@ -49,6 +62,7 @@ class Human:
         self.money += self.job.salary
         self.gladness -= self.job.gladness_less
         self.satiety -= 4
+        self.walk += 10
 
     def shopping(self, manage):
         if self.car.drive():
@@ -72,10 +86,20 @@ class Human:
             self.gladness += 10
             self.satiety += 2
             self.money -= 15
+        elif manage == "walk":
+            print("go go go")
+            self.chill -= 5
+            self.home.food = 50
+            self.walk += 5
 
     def chill(self):
         self.gladness += 10
         self.home.mess += 5
+        self.walk -= 5
+
+    def walk(self):
+        self.gladness += 10
+        self.home.mess -= 5
 
     def clean_home(self):
         self.gladness -= 5
@@ -92,6 +116,7 @@ class Human:
         print(f"Money – {self.money}")
         print(f"Satiety – {self.satiety}")
         print(f"Gladness – {self.gladness}")
+        print(f"Walk – {self.walk}")
         home_indexes = "Home indexes"
         print(f"{home_indexes:^50}", "\n")
         print(f"Food – {self.home.food}")
