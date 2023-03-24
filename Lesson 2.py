@@ -1,15 +1,16 @@
 import random
-class Student:
+class cat:
     def __init__(self, name):
         self.name = name
         self.gladness = 50
         self.progress = 0
+        self.eat = 50
         self.alive = True
 
-    def to_study(self):
-        print("Time to study")
-        self.progress += 0.12
-        self.gladness -= 3
+    def to_eat(self):
+        print("Time to eat!")
+        self.progress -= 0.12
+        self.gladness += 3
 
     def to_sleep(self):
         print("I will sleep")
@@ -19,6 +20,7 @@ class Student:
         print("Rest time")
         self.gladness += 5
         self.progress -= 0.1
+        self.eat -= 0.1
 
     def is_alive(self):
         if self.progress < -0.5:
@@ -43,7 +45,7 @@ class Student:
         print(f"{day:=^50}")
         live_cube = random.randint(1, 3)
         if live_cube == 1:
-            self.to_study()
+            self.to_eat()
         elif live_cube == 2:
             self.to_sleep()
         elif live_cube == 3:
@@ -51,12 +53,9 @@ class Student:
         self.end_of_day()
         self.is_alive()
 
-nick = Student(name="Nick")
-kate = Student(name="Kate")
+maks = cat(name="Maks")
 for day in range(365):
-    if nick.alive == False:
+    if maks.alive == False:
         break
-    nick.live(day)
-    if kate.alive == False:
-        break
-    kate.live(day)
+    maks.live(day)
+
